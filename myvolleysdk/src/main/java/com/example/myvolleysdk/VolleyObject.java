@@ -13,7 +13,7 @@ public class VolleyObject {
 
     private static Context mcontext;
     private static MyVolleySingleton myVolleySingleton;
-    private String URL="https://api.androidhive.info/volley/person_object.json";
+    private String URL="https://api.androidhive.info/volley/person_object.json" ;
 
     public static void initSDK(Context context){
         mcontext=context.getApplicationContext();
