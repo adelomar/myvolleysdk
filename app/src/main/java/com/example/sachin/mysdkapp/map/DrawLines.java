@@ -1,7 +1,9 @@
 package com.example.sachin.mysdkapp.map;
 
 import android.Manifest;
+import android.app.ActivityManager;
 import android.app.AlertDialog;
+import android.app.Application;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -93,11 +95,15 @@ public class DrawLines extends AppCompatActivity implements OnMapReadyCallback {
 
 
         button = (Button) findViewById(R.id.button);
+        if(checkifServiceIsRunning()){
+            button.setText("stop".toUpperCase());
+        }
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (button.getText().toString().toLowerCase().equalsIgnoreCase("start")) {
                     button.setText("stop".toUpperCase());
 
@@ -345,5 +351,23 @@ public class DrawLines extends AppCompatActivity implements OnMapReadyCallback {
             }
         }
     };
+
+
+
+    public boolean checkifServiceIsRunning(){
+        boolean isServiceRunning=false;
+
+        final ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        final List<ActivityManager.RunningServiceInfo> services = activityManager.getRunningServices(Integer.MAX_VALUE);
+
+        for (ActivityManager.RunningServiceInfo runningServiceInfo : services) {
+            System.out.println("------services----- "+runningServiceInfo.service.getClassName());
+            if (runningServiceInfo.service.getClassName().equals(BackgroundService.class.getName())){
+                isServiceRunning= true;
+            }
+        }
+
+        return isServiceRunning;
+    }
 }
 
