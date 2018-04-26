@@ -16,6 +16,7 @@ public class MainActivity extends BaseClassActivity implements VolleyResponseInt
     private TextView resultTV;
     private TextView resultTV2;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
